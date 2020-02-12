@@ -30,12 +30,12 @@ def create_maze_2():
 def create_maze_3():
     maze = []
     
-    maze.append(['.', '.', '.', 'o', '.'])
-    maze.append(['.', ' ', ' ', ' ', '.'])
-    maze.append(['.', ' ', '.', '.', '.'])
-    maze.append(['.', ' ', ' ', ' ', '.'])
-    maze.append(['.', ' ', ' ', ' ', '.'])
-    maze.append(['.', '.', 'x', '.', '.'])
+    maze.append(['.', '.', '.', 'o', '.', '.'])
+    maze.append(['.', ' ', ' ', ' ', ' ', '.'])
+    maze.append(['.', ' ', '.', '.', ' ', '.'])
+    maze.append(['.', ' ', ' ', ' ', ' ', '.'])
+    maze.append(['.', ' ', ' ', ' ', ' ', '.'])
+    maze.append(['.', '.', '.', 'x', '.', '.'])
 
     return maze
 
