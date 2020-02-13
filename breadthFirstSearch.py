@@ -4,6 +4,8 @@ import subprocess
 
 import mazes
 
+import time
+
 
 # from PIL import Image
 # import numpy
@@ -104,12 +106,17 @@ if __name__ == "__main__":
 
     subprocess.run('clear')
     print()
-    
+
     maze = mazes.create_maze_1()
     coords = find_start_end(maze)
     
     show_maze(maze)
     input("Press Any Key To Show The Solution")
 
+    start_time = time.time()
+
     solution = solve_maze(maze, coords)
     show_sol(maze, solution, coords)
+
+    end_time = time.time()
+    print('{:.10f} ms'.format((end_time - start_time) * 1000))
