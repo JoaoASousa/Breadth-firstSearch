@@ -2,42 +2,17 @@ from queue import Queue
 from copy import deepcopy
 import subprocess
 
-
-def create_maze():
-    maze = []
-    
-    maze.append(['.', '.', '.', 'o', '.'])
-    maze.append(['.', ' ', ' ', ' ', '.'])
-    maze.append(['.', ' ', '.', '.', '.'])
-    maze.append(['.', ' ', ' ', ' ', '.'])
-    maze.append(['.', 'x', '.', '.', '.'])
-
-    return maze
+import mazes
 
 
-def create_maze_2():
-    maze = []
+# from PIL import Image
+# import numpy
 
-    maze.append(['.', '.', '.', '.', '.'])
-    maze.append(['o', ' ', ' ', ' ', '.'])
-    maze.append(['.', ' ', '.', ' ', '.'])
-    maze.append(['.', ' ', ' ', ' ', '.'])
-    maze.append(['.', '.', 'x', '.', '.'])
+# img = Image.open("m2.png")
+# imgarr = numpy.array(img)
 
-    return maze
-
-
-def create_maze_3():
-    maze = []
-    
-    maze.append(['.', '.', '.', 'o', '.', '.'])
-    maze.append(['.', ' ', ' ', ' ', ' ', '.'])
-    maze.append(['.', ' ', '.', '.', ' ', '.'])
-    maze.append(['.', ' ', ' ', ' ', ' ', '.'])
-    maze.append(['.', ' ', ' ', ' ', ' ', '.'])
-    maze.append(['.', '.', '.', 'x', '.', '.'])
-
-    return maze
+# for i in range(1000):
+#     print(imgarr[i])
 
 
 def find_start_end(maze):
@@ -60,8 +35,13 @@ def check_move(maze, current, coords):
         elif (c == 'R'): pos[1] += 1
         elif (c == 'L'): pos[1] -= 1
     
-    if (pos[0] < 0 or pos[0] > len(maze[0]) or pos[1] < 0 or pos[1] > len(maze)):
+    if (pos[0] < 0 or pos[0] >= len(maze[0]) or pos[1] < 0 or pos[1] >= len(maze)):
         return False
+
+    if (len(current) >= 2):
+        # Doesn't make sense going in one direction and then going back right after
+        if (current[-2:] == 'UD' or current[-2:] == 'DU' or current[-2:] == 'RL' or current[-2:] == 'LR'):
+            return False
 
     if (pos == coords[1]):
         maze[coords[1][0]][coords[1][1]] = 'X' # X -> Found end with current path; x -> end not yet found
@@ -76,7 +56,7 @@ def check_move(maze, current, coords):
 
 
 def solve_maze(maze, coords):
-
+    elements_tested = 0
     q = Queue(0)
     q.put("")
 
@@ -87,10 +67,12 @@ def solve_maze(maze, coords):
         for i in ['U', 'D', 'L', 'R']:
             new_elem = current + i
             # print(new_elem)
+            elements_tested += 1
             if (check_move(maze, new_elem, coords)):
                 q.put(new_elem)
 
                 if (maze[coords[1][0]][coords[1][1]] == 'X'):
+                    print('\nElements Tested: {}'.format(elements_tested))
                     print('\nSolution:')
                     print(new_elem)
                     return new_elem
@@ -122,7 +104,8 @@ if __name__ == "__main__":
 
     subprocess.run('clear')
     print()
-    maze = create_maze_3()
+    
+    maze = mazes.create_maze_1()
     coords = find_start_end(maze)
     
     show_maze(maze)
