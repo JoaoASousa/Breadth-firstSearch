@@ -7,15 +7,6 @@ import mazes
 import time
 
 
-# from PIL import Image
-# import numpy
-
-# img = Image.open("m2.png")
-# imgarr = numpy.array(img)
-
-# for i in range(1000):
-#     print(imgarr[i])
-
 
 def find_start_end(maze):
 
@@ -107,7 +98,7 @@ if __name__ == "__main__":
     subprocess.run('clear')
     print()
 
-    maze = mazes.create_maze_1()
+    maze = mazes.create_maze_4()
     coords = find_start_end(maze)
     
     show_maze(maze)
