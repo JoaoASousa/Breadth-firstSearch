@@ -28,7 +28,7 @@ def check_move(maze, current, coords):
         elif (c == 'R'): pos[1] += 1
         elif (c == 'L'): pos[1] -= 1
     
-    if (pos[0] < 0 or pos[0] >= len(maze[0]) or pos[1] < 0 or pos[1] >= len(maze)):
+    if (pos[0] < 0 or pos[0] >= len(maze[0]) or pos[1] < 0 or pos[1] >= len(maze[1])):
         return False
 
     if (len(current) >= 2):
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     subprocess.run('clear')
     print()
 
-    maze = mazes.create_maze_4()
+    maze = mazes.create_maze_5()
     coords = find_start_end(maze)
     
     show_maze(maze)
