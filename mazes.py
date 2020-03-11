@@ -52,7 +52,6 @@ def create_maze_4():
     return maze
 
 
-# TODO FINISH MAZE
 def create_maze_5():
     maze = []
 
